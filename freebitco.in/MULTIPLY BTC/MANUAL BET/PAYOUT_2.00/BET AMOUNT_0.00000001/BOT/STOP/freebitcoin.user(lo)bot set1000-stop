@@ -1,0 +1,209 @@
+var startValue = '0.00000001', // Don't lower the decimal point more than 4x of current balance
+        stopPercentage = 0.001, // In %. I wouldn't recommend going past 0.08
+        maxWait = 10, // In milliseconds
+        stopped = false,
+        stopBefore = 1; // In minutes
+		counterr = 1;	
+		zareset = 0;
+		
+		
+		numGames = 1000;
+		
+		
+		balanceBefore = parseFloat($('#balance').text());
+var analize = {};
+analize['0.00000001'] = { multi: 0.00000001, count:0 }; //1
+analize['0.00000002'] = { multi: 0.00000002, count:0 }; //2
+analize['0.00000004'] = { multi: 0.00000004, count:0 }; //3
+analize['0.00000008'] = { multi: 0.00000008, count:0 }; //4
+analize['0.00000016'] = { multi: 0.00000016, count:0 }; //5
+analize['0.00000032'] = { multi: 0.00000032, count:0 }; //6
+analize['0.00000064'] = { multi: 0.00000064, count:0 }; //7
+analize['0.00000128'] = { multi: 0.00000128, count:0 }; //8
+analize['0.00000256'] = { multi: 0.00000256, count:0 }; //9
+analize['0.00000512'] = { multi: 0.00000512, count:0 }; //10
+analize['0.00001024'] = { multi: 0.00001024, count:0 }; //11
+analize['0.00002048'] = { multi: 0.00002048, count:0 }; //12
+analize['0.00004096'] = { multi: 0.00004096, count:0 }; //13
+analize['0.00008192'] = { multi: 0.00008192, count:0 }; //14
+analize['0.00016384'] = { multi: 0.00016384, count:0 }; //15
+analize['0.00032768'] = { multi: 0.00032768, count:0 }; //16
+analize['0.00065536'] = { multi: 0.00065536, count:0 }; //17
+analize['0.00131072'] = { multi: 0.00131072, count:0 }; //18
+analize['0.00524288'] = { multi: 0.00524288, count:0 }; //19
+analize['0.01048576'] = { multi: 0.01048576, count:0 }; //20
+analize['0.02097152'] = { multi: 0.02097152, count:0 }; //21
+analize['0.04194304'] = { multi: 0.04194304, count:0 }; //22
+analize['0.08388608'] = { multi: 0.08388608, count:0 }; //23
+analize['0.16777216'] = { multi: 0.16777216, count:0 }; //24
+analize['0.33554432'] = { multi: 0.33554432, count:0 }; //25
+analize['0.67108864'] = { multi: 0.67108864, count:0 }; //26
+
+ 
+var $loButton = $('#double_your_btc_bet_lo_button'),
+                $hiButton = $('#double_your_btc_bet_hi_button');
+ 
+function multiply(){
+        var current = $('#double_your_btc_stake').val();
+        var multiply = (current * 2).toFixed(8);
+  if (multiply > 0.00008192 ){
+	  multiply = 0.00008192;
+	  zareset = 1;
+  }
+
+        $('#double_your_btc_stake').val(multiply);
+		 //console.log(" Multiply " + multiply );
+}
+ 
+function getRandomWait(){
+        var wait = Math.floor(Math.random() * maxWait ) + 1;
+ 
+       // console.log('Waiting for ' + wait + 'ms before next bet.');
+ 
+        return wait ;
+}
+ 
+function startGame(){
+        console.log('Game started!');
+        reset();
+        $loButton.trigger('click');
+}
+ 
+ 
+
+	
+function stopGame(){
+//uncoment for save analyze to file.txt
+	
+    // var content = "Money before: t"+ balanceBefore +"rn"+ "Money now: t"+ parseFloat($('#balance').text())+"rn"+"Profit: t"+ (parseFloat($('#balance').text())-balanceBefore).toFixed(8)+"rn"+"rn";
+	  
+	// for (var x in analize){
+		// var value = analize[x];
+		// cou = 0;
+		// for (var y in value){ 
+			// if(cou == 0)
+				// content=content+ "" + value[y].toFixed(8);
+			// else
+				// content=content+ " " + value[y];
+			// cou = 1;
+		// }
+		// content=content+ "rn";
+	// }
+	// content=content+ "rn"+ "Games play: "+counterr;
+	  
+// var link = document.createElement('a');
+// var blob = new Blob(["ufeff", content]);
+// var url = URL.createObjectURL(blob);
+// link.href = url;
+// link.setAttribute('download', 'analiza.txt');
+// link.click();
+        
+		stopped = true;
+}
+ 
+function reset(){
+		zareset = 0;
+        $('#double_your_btc_stake').val(startValue);
+				 //console.log(analize);
+		 console.log("Counter: "+counterr+"/"+numGames+" Balance "+ parseFloat($('#balance').html()) + ". Bet value " + parseFloat($('#double_your_btc_stake').val()) + ".n");
+}
+ 
+// quick and dirty hack if you have very little bitcoins like 0.0000001
+function deexponentize(number){
+        return number * 1000000;
+}
+ 
+function iHaveEnoughMoni(){
+        var balance = deexponentize(parseFloat($('#balance').text()));
+        var current = deexponentize($('#double_your_btc_stake').val());
+ 
+        return ((balance*2)/100) * (current*2) > stopPercentage/100;
+}
+ 
+function stopBeforeRedirect(){
+        var minutes = parseInt($('title').text());
+ 
+        if( minutes < stopBefore )
+        {
+                stopGame();
+ 
+                return true;
+        }
+ 
+        return false;
+}
+ 
+// Unbind old shit
+$('#double_your_btc_bet_lose').unbind();
+$('#double_your_btc_bet_win').unbind();
+
+
+// Loser
+$('#double_your_btc_bet_lose').bind("DOMSubtreeModified",function(event){
+        if( $(event.currentTarget).is(':contains("lose")') )
+        {
+                console.log(' You LOST!  |');
+				
+if ($('#double_your_btc_stake').val() in analize)
+{
+    var tmp = analize[$('#double_your_btc_stake').val() ].count;
+	analize[$('#double_your_btc_stake').val() ].count = tmp +1;
+}
+				counterr++;
+				
+				
+                multiply();
+				
+				if (zareset == 1){
+					reset();	
+				}
+                setTimeout(function(){
+                        $loButton.trigger('click');
+                }, getRandomWait());
+ 
+                //$loButton.trigger('click');
+        }
+});
+ 
+// Winner
+$('#double_your_btc_bet_win').bind("DOMSubtreeModified",function(event){
+        if( $(event.currentTarget).is(':contains("win")') )
+        {
+		
+		if (counterr >numGames){
+			stopGame();
+		}
+		counterr++;
+                if( stopBeforeRedirect() )
+                {
+                        return;
+                }
+ 
+                if( iHaveEnoughMoni() )
+                {
+                        console.log('You WON!  |');
+ if ($('#double_your_btc_stake').val() in analize)
+{
+  
+    var tmp = analize[$('#double_your_btc_stake').val() ].count;
+	analize[$('#double_your_btc_stake').val() ].count = tmp +1;
+}
+                        reset();
+ 
+                        if( stopped )
+                        {
+                                stopped = false;
+                                return false;
+                        }
+                }
+                else
+                {
+                        console.log('You WON!');
+;
+                }
+ 
+                setTimeout(function(){
+                        $loButton.trigger('click');
+                }, getRandomWait());
+        }
+}); startGame()

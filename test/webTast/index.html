@@ -1,0 +1,719 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="index.css" type="text/css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <script src="/index.js"></script>
+  <div id="double_your_btc" class="game_content" style="margin-top:20px;">
+    <p class="auto_bet_element" style="display: none;">Enter your settings for performing automated betting below and then click on START AUTO-BET and sit back and watch while your browser plays for you! Automated betting will stop if you click the STOP AUTO-BET button after it starts or if this browser
+      tab/window is closed.</p>
+    <div class="row manual_auto_bet_button_container">
+      <div id="manual_bet_on" class="manual_bet_on_button betting_mode_on">MANUAL BET</div>
+      <div id="auto_bet_running" class="bold" style="display:none;">Please stop auto-betting before switching to manual bet.<a href="javascript:void(0);" class="betting_close" id="close_auto_bet_running_message">×</a></div>
+      <div id="auto_bet_on" class="manual_auto_bet_on_button auto_bet_on_button">AUTO BET</div>
+    </div>
+    <div id="double_your_btc_main_container_outer" style="color:#fff;">
+      <div id="double_your_btc_main_container" class="row double_your_btc_main_container_remove">
+        <div id="double_your_btc_left_section" class="double_your_btc_left_section_remove betting_left_right_section">
+          <center>
+            <div class="row" style="width:280px;">
+              <p class="bold multiplier_header_background max_profit_per_bet_header">MAX PROFIT PER BET</p>
+              <p class="multiply_max_bet max_profit_per_bet_value bold">20 BTC</p>
+            </div>
+            <div class="row" style="width:280px;">
+              <ul style="list-style:none; text-align: center; margin-left:1em;margin-top:10px;">
+                <li class="bet_amount_box bold multiplier_header_background bet_amount_options_margin" style="padding:4px 5px;">BET AMOUNT</li>
+                <li class="bet_amount_box bold bet_amount_options bet_amount_options_margin"><a href="javascript:void(0);" id="double_your_btc_half" style="color: inherit;">/2</a></li>
+                <li class="bet_amount_box bold bet_amount_options bet_amount_options_margin"><a href="javascript:void(0);" id="double_your_btc_2x" style="color: inherit;">2x</a></li>
+                <li class="bet_amount_box bold bet_amount_options bet_amount_options_margin"><a href="javascript:void(0);" id="double_your_btc_min" style="color: inherit;">MIN</a></li>
+                <li class="bet_amount_box bold bet_amount_options"><a href="javascript:void(0);" id="double_your_btc_max" style="color: inherit;">MAX</a></li>
+              </ul><input class="bold bet_amount_value_input common_background_border" type="text" name="stake" id="double_your_btc_stake" value="0.00000001"></div>
+            <div class="row" style="width:280px;">
+              <ul style="list-style:none; text-align: center; margin-left:1em;">
+                <li class="win_profit_box bold multiplier_header_background win_profit_li">WIN PROFIT</li>
+                <li class="win_profit_box_value bold win_profit_value_li" id="win_amount">0.00000001</li>
+              </ul>
+            </div>
+            <div class="row" style="margin-top:10px; width:280px;">
+              <ul style="list-style:none; text-align: center; margin-left:1em;">
+                <li class="payout_win_box bold multiplier_header_background" style="margin-right:10px;">PAYOUT</li>
+                <li class="payout_win_box bold multiplier_header_background" style="">WIN CHANCE</li>
+              </ul>
+            </div>
+            <div class="row" style=" width:280px;">
+              <ul style="list-style:none; text-align: center; margin-left:1em;">
+                <li class="payout_win_values bold" style="margin-right:10px;"><input class="bold payout_value_input common_background_border" type="text" value="2.00" id="double_your_btc_payout_multiplier" onclick="this.select();"></li>
+                <li class="payout_win_values bold"><input class="bold win_chance_value_input common_background_border" type="text" value="47.50%" id="double_your_btc_win_chance" onclick="this.select();"></li>
+              </ul>
+            </div>
+            <div class="row" style=" margin-top:10px; width:280px;">
+              <p id="payout_value_message" class="odd_win_chance_message">Enter a value between 1.01 and 4750.00</p>
+              <p id="win_chance_value_message" class="odd_win_chance_message">Enter a value between 0.02 and 94.06</p>
+            </div>
+          </center>
+        </div>
+        <div id="double_your_btc_auto_bet_left_section" class="double_your_btc_left_section_remove betting_left_right_section" style="height:450px; display:none;">
+          <center>
+            <div class="row" style="margin-top:17px; width:280px;">
+              <ul style="list-style:none; text-align: center; margin-left:1em;">
+                <li class="win_profit_box bold multiplier_header_background" style="width:100px; padding:7px 6px;">BASE BET</li>
+                <li class="win_profit_box_value bold base_bet_max_bet_value_li" style="width:150px;"><input class="bold remove_autobet_error auto_bet_base_bet_value common_background_border" type="text" id="autobet_base_bet" value="0.00000001"></li>
+              </ul>
+            </div>
+            <div class="row" style="margin-top:10px; max-width:280px !important;">
+              <ul style="list-style:none; text-align: center; margin-left:1em;">
+                <li class="win_profit_box bold multiplier_header_background" style="width:auto; padding:7px 6px;">MAX BET/WIN</li>
+                <li class="win_profit_box_value bold base_bet_max_bet_value_li" style="width:140px;"><input class="bold remove_autobet_error auto_bet_max_bet_win_value common_background_border" type="text" id="autobet_max_bet" value="20"></li>
+              </ul>
+            </div>
+            <div class="row" style="margin-top:10px; width:280px;">
+              <ul style="list-style:none; text-align: center; margin-left:1em;">
+                <li class="payout_win_box bold multiplier_header_background" style="margin-right:10px;">BET ODDS</li>
+                <li class="payout_win_box bold multiplier_header_background" style="">NO. OF ROLLS</li>
+              </ul>
+            </div>
+            <div class="row" style=" width:280px;">
+              <ul style="list-style:none; text-align: center; margin-left:1em;">
+                <li class="payout_win_values bold" style="margin-right:10px;"><input class="bold remove_autobet_error bet_odds_value common_background_border" type="text" id="autobet_bet_odds" value="2.00" onclick="this.select();"></li>
+                <li class="payout_win_values bold"><input class="bold remove_autobet_error no_of_rolls_value common_background_border" type="text" id="autobet_roll_count" value="100"></li>
+              </ul>
+            </div>
+            <div class="row" style="width:280px;">
+              <p id="autobet_payout_value_message" class="odd_win_chance_message">Enter a value between 1.01 and 4750.00</p>
+            </div>
+            <div class="row multiplier_header_div">
+              <p class="bet_on_p multiplier_header_background bold auto_bet_on_p">BET ON</p>
+            </div>
+            <div class="row auto_bet_right_section_box">
+              <p class="bold auto_bet_on_p"></p>
+              <center><span class="bold hi_lo_alternate_span"><input type="checkbox" id="autobet_bet_hi" class="auto_bet_on_input big_checkbox hidden-field"><span class="custom checkbox"></span>&nbsp; HI</span><span class="bold hi_lo_alternate_span"><input type="checkbox" id="autobet_bet_lo" class="auto_bet_on_input big_checkbox hidden-field"><span class="custom checkbox"></span>&nbsp;
+                LO</span><span class="bold hi_lo_alternate_span"><input type="checkbox" id="autobet_bet_alternate" checked="checked" class="auto_bet_on_input big_checkbox hidden-field"><span class="custom checkbox checked"></span>&nbsp; ALTERNATE</span>
+              </center>
+              <p></p>
+            </div>
+            <div class="row multiplier_header_div">
+              <p class="multiplier_header_background bold auto_bet_on_p" style="padding:5px 0;">STOP BETTING AFTER</p>
+            </div>
+            <div class="row auto_bet_right_section_box">
+              <center>
+                <ul class="jackpot_table_ul" style="margin-bottom:1px; ">
+                  <li class="auto_bet_first_column bold">
+                    <center><input type="checkbox" id="stop_after_profit" class="big_checkbox hidden-field" style="margin-top:8px !important;"><span class="custom checkbox"></span></center>
+                  </li>
+                  <li class="auto_bet_second_column bold" style="margin-top:3px !important;">
+                    <center>PROFIT &gt;=</center>
+                  </li>
+                  <li class="auto_bet_third_column bold">
+                    <center><input type="text" id="stop_after_profit_value" value="0.00000001" class="remove_autobet_error bold auto_bet_input_box common_background_border" style="width:140px; margin-top:-1px !important;"></center>
+                  </li>
+                </ul>
+              </center>
+            </div>
+            <div class="row auto_bet_right_section_box">
+              <center>
+                <ul class="jackpot_table_ul" style="margin-bottom:1px; ">
+                  <li class="auto_bet_first_column bold">
+                    <center><input type="checkbox" id="stop_after_loss" class="big_checkbox hidden-field" style="margin-top:8px !important;"><span class="custom checkbox"></span></center>
+                  </li>
+                  <li class="auto_bet_second_column bold" style="margin-top:3px !important;">
+                    <center>LOSS &gt;=</center>
+                  </li>
+                  <li class="auto_bet_third_column bold">
+                    <center><input type="text" id="stop_after_loss_value" value="0.00000001" class="remove_autobet_error bold auto_bet_input_box common_background_border" style="width:140px; margin-top:-1px !important;"></center>
+                  </li>
+                </ul>
+              </center>
+            </div>
+          </center>
+        </div>
+        <div id="double_your_btc_middle_section" class="double_your_btc_middle_section_remove" style="background: url(&quot;/images/multiply_bg.jpg&quot;) rgb(0, 122, 92); height: 362.781px;">
+          <div class="row" style="margin:0; padding:0;">
+            <h1 class="counter"> <span id="multiplier_first_digit">0</span> <span id="multiplier_second_digit">7</span> <span id="multiplier_third_digit">4</span> <span id="multiplier_fourth_digit">5</span> <span id="multiplier_fifth_digit" style="margin-right:none;">3</span></h1></div>
+          <div class="row manual_bet_element" style="margin:0; padding:0;">
+            <ul class="manual_bet_hi_lo_ul">
+              <center>
+                <li id="bet_hi_button" class="bet_hi_button_remove"><button id="double_your_btc_bet_hi_button">BET HI</button></li>
+                <li id="bet_lo_button" class="bet_lo_button_remove"><button id="double_your_btc_bet_lo_button">BET LO</button></li>
+              </center>
+            </ul>
+          </div>
+          <div id="double_your_btc_result" style="padding-bottom: 0px;" class="center">
+            <div id="double_your_btc_bet_win" class="bold center double_your_btc_bet_win_message" style="display: none;"></div>
+            <div id="double_your_btc_bet_lose" class="bold center double_your_btc_bet_lose_message" style="display: none;"></div>
+            <div id="jackpot_message" class="bold center jackpot_message_content" style="display: none;"></div>
+            <div id="double_your_btc_error" class="bold center double_your_btc_error_message" style="display: none;"></div>
+          </div>
+          <p class="manual_bet_element manual_bet_gt_lt_p">To win, BET HI and get a number higher than <span class="gt bold gt_lt_span">5250</span> or BET LO and get a number lower than <span class="lt bold gt_lt_span">4750</span></p>
+          <div class="row" id="multiplier_enable_sound_div"><input id="manual_enable_sounds" type="checkbox" class="hidden-field"><span class="custom checkbox"></span>&nbsp; ENABLE SOUNDS</div>
+          <p class="bold manual_bet_element keyboard_container"><a href="javascript:void(0);" data-reveal-id="myModal20" style="color:#FF8E14; text-shadow: 0 1px #000;">KEYBOARD SHORTCUTS</a></p>
+          <p id="autobet_error" class="bold center auto_new_design_error" style="display:none;"></p>
+          <p class="auto_bet_element" id="auto_betting_button" style="margin-bottom:0 !important; display:none; "><button class="auto_bet_start_stop_button" id="start_autobet" style="padding:10px;">START AUTO-BET</button></p>
+          <p id="stop_auto_betting" style="display:none;"><button class="auto_bet_start_stop_button" id="stop_autobet_button" style="padding:10px;">STOP AUTO-BET</button></p>
+          <div id="autobet_results_box" class="autobet_new_design_results_box" style="display:none;">
+            <p id="rolls_status" class="bold">ROLLS PLAYED :</p>
+            <p id="rolls_played_count" class="bold autobet_new_design_color">0</p>
+            <p id="rolls_status" class="bold">ROLLS REMAINING :</p>
+            <p id="rolls_remaining_count" class="bold autobet_new_design_color">0</p>
+            <p id="autobet_highest_bet_msg" class="bold">BIGGEST BET THIS SESSION :</p>
+            <p id="autobet_highest_bet" class="bold autobet_new_design_color">0.00000001 BTC</p>
+            <p id="autobet_highest_win_msg" class="bold">BIGGEST WIN THIS SESSION :</p>
+            <p id="autobet_highest_win" class="bold autobet_new_design_color">0.00000000 BTC</p>
+            <p id="autobet_pl_msg" class="bold">BETTING P/L THIS SESSION : </p>
+            <p id="autobet_pl" class="bold" style="padding:5px 0; color:#000; background-color:#33FF33; text-shadow: none;">0.00000000 BTC</p>
+            <p class="autobet_view_bet_log bold" style="display:none;"><a href="javascript:void(0);" class="display_bet_log_table display_bet_log_table_top" style="color:#FF8E14; text-shadow: 0 1px #000;">VIEW / REFRESH BET DETAILS TABLE</a></p>
+          </div>
+          <p class="auto_bet_element bold play_for_jackpot_header" style="display:none;">PLAY FOR JACKPOTS</p>
+          <p class="auto_bet_element jackpot_roll_number" style="display:none;">Roll number <b style="color:#feba00;">8888</b> to win the jackpots!</p>
+          <div class="row text-center auto_bet_element width_margin_padding_setting" style="display:none;">
+            <div class="row jackpot_container">
+              <center>
+                <ul class="jackpot_table_ul" style="margin-bottom:0;">
+                  <li class="jackpot_header_first_column bold multiplier_header_background">SELECT</li>
+                  <li class="jackpot_header_second_column bold multiplier_header_background">PRIZE (BTC)</li>
+                  <li class="jackpot_header_third_column bold multiplier_header_background">COST (BTC)</li>
+                </ul>
+              </center>
+            </div>
+            <div class="row jackpot_row">
+              <center>
+                <ul class="jackpot_table_ul" style="margin-bottom:1px; ">
+                  <li class="jackpot_first_column bold">
+                    <center><input type="checkbox" class="autobet_play_jackpot jackpot_input_margin hidden-field" value="5"><span class="custom checkbox"></span></center>
+                  </li>
+                  <li class="jackpot_second_column bold">
+                    <center>1.00000000</center>
+                  </li>
+                  <li class="jackpot_third_column bold">
+                    <center>0.00012500</center>
+                  </li>
+                </ul>
+              </center>
+            </div>
+            <div class="row jackpot_row">
+              <center>
+                <ul class="jackpot_table_ul" style="margin-bottom:1px; ">
+                  <li class="jackpot_first_column bold">
+                    <center><input type="checkbox" class="autobet_play_jackpot jackpot_input_margin hidden-field" value="4"><span class="custom checkbox"></span></center>
+                  </li>
+                  <li class="jackpot_second_column bold">
+                    <center>0.10000000</center>
+                  </li>
+                  <li class="jackpot_third_column bold">
+                    <center>0.00001250</center>
+                  </li>
+                </ul>
+              </center>
+            </div>
+            <div class="row jackpot_row">
+              <center>
+                <ul class="jackpot_table_ul" style="margin-bottom:1px;">
+                  <li class="jackpot_first_column bold">
+                    <center><input type="checkbox" class="autobet_play_jackpot jackpot_input_margin hidden-field" value="3"><span class="custom checkbox"></span></center>
+                  </li>
+                  <li class="jackpot_second_column bold">
+                    <center>0.01000000</center>
+                  </li>
+                  <li class="jackpot_third_column bold">
+                    <center>0.00000125</center>
+                  </li>
+                </ul>
+              </center>
+            </div>
+            <div class="row jackpot_row">
+              <center>
+                <ul class="jackpot_table_ul" style="margin-bottom:1px;">
+                  <li class="jackpot_first_column bold">
+                    <center><input type="checkbox" class="autobet_play_jackpot jackpot_input_margin hidden-field" value="2"><span class="custom checkbox"></span></center>
+                  </li>
+                  <li class="jackpot_second_column bold">
+                    <center>0.00100000</center>
+                  </li>
+                  <li class="jackpot_third_column bold">
+                    <center>0.00000013</center>
+                  </li>
+                </ul>
+              </center>
+            </div>
+            <div class="row jackpot_row">
+              <center>
+                <ul class="jackpot_table_ul" style="margin-bottom:1px; ">
+                  <li class="jackpot_first_column bold">
+                    <center><input type="checkbox" class="autobet_play_jackpot jackpot_input_margin hidden-field" value="1"><span class="custom checkbox"></span></center>
+                  </li>
+                  <li class="jackpot_second_column bold">
+                    <center>0.00010000</center>
+                  </li>
+                  <li class="jackpot_third_column bold">
+                    <center>0.00000002</center>
+                  </li>
+                </ul>
+              </center>
+            </div>
+          </div>
+        </div>
+        <div id="double_your_btc_right_section" class="double_your_btc_right_section_remove betting_left_right_section" style="padding-bottom:20px;">
+          <center>
+            <p class="bold text_shadow">PLAY FOR JACKPOTS</p>
+            <p class="bold text_shadow">Roll number <b style="color:#feba00;">8888</b> to win the jackpots!</p>
+            <div class="row text-center width_margin_padding_setting">
+              <div class="row jackpot_container">
+                <center>
+                  <ul class="jackpot_table_ul" style="margin-bottom:0;">
+                    <li class="jackpot_header_first_column bold multiplier_header_background">SELECT</li>
+                    <li class="jackpot_header_second_column bold multiplier_header_background">PRIZE (BTC)</li>
+                    <li class="jackpot_header_third_column bold multiplier_header_background">COST (BTC)</li>
+                  </ul>
+                </center>
+              </div>
+              <div class="row jackpot_row">
+                <center>
+                  <ul class="jackpot_table_ul" style="margin-bottom:1px; ">
+                    <li class="jackpot_first_column bold">
+                      <center><input type="checkbox" class="play_jackpot jackpot_input_margin hidden-field" value="5"><span class="custom checkbox"></span></center>
+                    </li>
+                    <li class="jackpot_second_column bold">
+                      <center>1.00000000</center>
+                    </li>
+                    <li class="jackpot_third_column bold">
+                      <center>0.00012500</center>
+                    </li>
+                  </ul>
+                </center>
+              </div>
+              <div class="row jackpot_row">
+                <center>
+                  <ul class="jackpot_table_ul" style="margin-bottom:1px; ">
+                    <li class="jackpot_first_column bold">
+                      <center><input type="checkbox" class="play_jackpot jackpot_input_margin hidden-field" value="4"><span class="custom checkbox"></span></center>
+                    </li>
+                    <li class="jackpot_second_column bold">
+                      <center>0.10000000</center>
+                    </li>
+                    <li class="jackpot_third_column bold">
+                      <center>0.00001250</center>
+                    </li>
+                  </ul>
+                </center>
+              </div>
+              <div class="row jackpot_row">
+                <center>
+                  <ul class="jackpot_table_ul" style="margin-bottom:1px;">
+                    <li class="jackpot_first_column bold">
+                      <center><input type="checkbox" class="play_jackpot jackpot_input_margin hidden-field" value="3"><span class="custom checkbox"></span></center>
+                    </li>
+                    <li class="jackpot_second_column bold">
+                      <center>0.01000000</center>
+                    </li>
+                    <li class="jackpot_third_column bold">
+                      <center>0.00000125</center>
+                    </li>
+                  </ul>
+                </center>
+              </div>
+              <div class="row jackpot_row">
+                <center>
+                  <ul class="jackpot_table_ul" style="margin-bottom:1px; ">
+                    <li class="jackpot_first_column bold">
+                      <center><input type="checkbox" class="play_jackpot jackpot_input_margin hidden-field" value="2"><span class="custom checkbox"></span></center>
+                    </li>
+                    <li class="jackpot_second_column bold">
+                      <center>0.00100000</center>
+                    </li>
+                    <li class="jackpot_third_column bold">
+                      <center>0.00000013</center>
+                    </li>
+                  </ul>
+                </center>
+              </div>
+              <div class="row jackpot_row">
+                <center>
+                  <ul class="jackpot_table_ul" style="margin-bottom:1px; ">
+                    <li class="jackpot_first_column bold">
+                      <center><input type="checkbox" class="play_jackpot jackpot_input_margin hidden-field" value="1"><span class="custom checkbox"></span></center>
+                    </li>
+                    <li class="jackpot_second_column bold">
+                      <center>0.00010000</center>
+                    </li>
+                    <li class="jackpot_third_column bold">
+                      <center>0.00000002</center>
+                    </li>
+                  </ul>
+                </center>
+              </div>
+            </div>
+          </center>
+        </div>
+        <div id="double_your_btc_auto_bet_right_section" class="double_your_btc_auto_bet_right_section_remove betting_left_right_section" style="display:none;">
+          <center>
+            <div class="row">
+              <center>
+                <ul class="on_win_on_lose_ul">
+                  <li style="float:left;"><a class="bet_amount_box bold multiplier_header_background on_win_on_lose" id="show_double_your_btc_auto_bet_on_win">ON WIN</a></li>
+                  <li style="float:left;"><a class="bet_amount_box bold on_win_on_lose" id="show_double_your_btc_auto_bet_on_lose">ON LOSE</a></li>
+                </ul>
+              </center>
+            </div>
+            <div class="row auto_bet_right_section_box">
+              <div class="on_win_on_lose_content_div" id="double_your_btc_auto_bet_on_win">
+                <p class="bold" style="float:left; margin-bottom:0 !important;"><input type="checkbox" id="autobet_win_return_to_base" class="big_checkbox hidden-field" checked="checked"><span class="custom checkbox checked"></span>&nbsp; RETURN TO BASE BET</p>
+                <p class="bold"><span style="padding-right: .5em; padding-top: 7px;float: left;"><input type="checkbox" id="autobet_win_increase_bet" class="big_checkbox hidden-field"><span class="custom checkbox"></span>&nbsp; INCREASE BET BY</span><span style="float: left;"><input type="text" id="autobet_win_increase_bet_percent" value="0.00" class="remove_autobet_error bold auto_bet_input_box common_background_border" style="width:65px;"></span>
+                  <span
+                    style="padding-left: .5em; padding-top: 7px;float: left;">%</span>
+                </p>
+                <p class="bold"><span style="padding-right: .5em; padding-top: 7px;float: left;"><input type="checkbox" id="autobet_win_change_odds" class="big_checkbox hidden-field"><span class="custom checkbox"></span>&nbsp; CHANGE ODDS TO</span><span style="float: left;"><input type="text" id="autobet_win_change_odds_value" value="2" class="remove_autobet_error auto_bet_input_box common_background_border bold" style="width:65px;"></span></p>
+              </div>
+              <div class="on_win_on_lose_content_div" style="display:none;" id="double_your_btc_auto_bet_on_lose">
+                <p class="bold" style="float:left; margin-bottom:0 !important;"><input type="checkbox" id="autobet_lose_return_to_base" class="big_checkbox hidden-field" checked="checked"><span class="custom checkbox checked"></span>&nbsp; RETURN TO BASE BET</p>
+                <p class="bold"><span style="padding-right: .5em; padding-top: 7px;float: left;"><input type="checkbox" id="autobet_lose_increase_bet" class="big_checkbox hidden-field"><span class="custom checkbox"></span>&nbsp; INCREASE BET BY</span><span style="float: left;"><input type="text" id="autobet_lose_increase_bet_percent" value="0.00" class="remove_autobet_error bold auto_bet_input_box common_background_border" style="width:65px;"></span>
+                  <span
+                    style="overflow: hidden; padding-left: .5em; padding-top: 7px;float: left;">%</span>
+                </p>
+                <p class="bold"><span style="padding-right: .5em; padding-top: 7px;float: left;"><input type="checkbox" id="autobet_lose_change_odds" class="big_checkbox hidden-field"><span class="custom checkbox"></span>&nbsp; CHANGE ODDS TO</span><span style="float: left;"><input type="text" id="autobet_lose_change_odds_value" value="2" class="remove_autobet_error auto_bet_input_box common_background_border bold" style="width:65px;"></span></p>
+              </div>
+            </div>
+            <div class="row multiplier_header_div" style="margin-top:10px;">
+              <p style="text-shadow: 0 1px #000; margin-top:5px; padding:5px 0;" class="multiplier_header_background bold auto_bet_on_p">ON HITTING MAX BET/WIN</p>
+            </div>
+            <div class="row auto_bet_right_section_box">
+              <p class="bold auto_bet_on_p" style="text-align:left; padding:0 20px 5px 10px;"><input type="checkbox" id="autobet_max_bet_reset" checked="checked" class="big_checkbox bold auto_bet_on_input hidden-field" style="float:left; margin-top:5px !important;"><span class="custom checkbox checked"></span>&nbsp; RETURN TO BASE
+                BET</p>
+              <p class="bold auto_bet_on_p" style="text-align:left; padding:0 20px 5px 10px"><input type="checkbox" id="autobet_max_bet_stop" class="big_checkbox bold auto_bet_on_input hidden-field" style="float:left; margin-top:5px !important;"><span class="custom checkbox"></span>&nbsp; STOP BETTING</p>
+            </div>
+            <div class="row auto_bet_right_section_box" style="margin-top:20px; border-radius:3px; font-size:14px;">
+              <p class="bold" style="text-align:left; padding:3px 10px;"><input type="checkbox" id="autobet_change_client_seed" class="big_checkbox auto_bet_on_input hidden-field"><span class="custom checkbox"></span>&nbsp; RANDOMIZE CLIENT SEED <a class="auto_bet_setting_span">?<span>Change client seed before each roll.</span></a></p>
+              <p
+                class="bold" style="text-align:left; padding:3px 10px;"><input type="checkbox" id="autobet_dnr" class="big_checkbox auto_bet_on_input hidden-field"><span class="custom checkbox"></span>&nbsp; DO NOT REFRESH <a class="auto_bet_setting_span">?<span>Do not refresh the page when FREE PLAY timer runs out, if AUTO BET is running.</span></a></p>
+                <p
+                  class="bold" style="text-align:left; padding:3px 10px;"><input type="checkbox" id="autobet_enable_sounds" class="big_checkbox auto_bet_on_input hidden-field"><span class="custom checkbox"></span>&nbsp; ENABLE SOUNDS</p>
+            </div>
+          </center>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:20px;margin-bottom: 20px;">
+      <div class="large-12 small-12 large-centered small-centered columns" id="bet_history_table">
+        <div class="large-12 small-12 columns center lottery_winner_table_box table_header_background br_5_5" style="padding: 5px 0;">
+          <div class="large-4 columns" style="text-align: right;"> <button id="newer_bet_history" class="button older_newer_button_a" style="text-shadow: none; box-shadow: none; font-size: 12px;"> <i class="fa fa-chevron-left" aria-hidden="true"></i> NEWER </button></div>
+          <div class="large-4 columns center"
+            style="margin:auto; padding: 10px 0;">ROLL HISTORY</div>
+          <div class="large-4 columns" style="text-align: left;"> <button id="older_bet_history" class="button older_newer_button_a" style="text-shadow: none; box-shadow: none; font-size: 12px;"> OLDER <i class="fa fa-chevron-right" aria-hidden="true"></i> </button></div>
+        </div>
+        <div id="bet_history_table_rows">
+          <div class="large-12 small-12 columns center lottery_winner_table_box" id="multiply_history_date_row_21_07_2017">
+            <div class="center" style="margin:auto; font-weight:bold;">DATE: 21/07/2017</div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_history_table_header">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell font_bold">TIME</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">GAME</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">BET</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">ROLL</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">STAKE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold"><span data-tooltip="" class="has-tip" title="Multiplier">MULT</span></div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">PROFIT</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell font_bold"><span data-tooltip="" class="has-tip" title="Jackpot">JPOT</span></div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell font_bold"><span data-tooltip="" class="has-tip" title="Verify">VER</span></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">22:10:01</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">7453</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=888b2f3807ec6c55250531e6218ad65a658dce4b8e0afbff4b86d2f7cd601122&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=ce56c8f7f85f512f5db4dc1d17d5ed8afb808690a3bd0a478736fae3de11e8da&amp;nonce=38342"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">22:08:53</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">580</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="green">0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=aec77380471fa968e979af86f61ec1a7b292e7f7a9a26bd5ccd0019af81732db&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=96bd57405249347d0942296fadcba08dc046da31e616ac693de3210339f4b661&amp;nonce=38341"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">22:07:59</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">4543</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=011ddfcd4863383144646bf524d4047bc11e7637f46285c566cf5b3b97140335&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=d8cf28e2ba497ccf29dc09bd3cf281e3dec5c0efb21dc8c0004cb8119933348e&amp;nonce=38340"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">22:05:13</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">8870</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="green">0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=b9c90bb0cf209643f48339c37320747c2b8ed4fe6aff496f4f5b394dbffa90ff&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=69624b5f59954c1ec30c0237e0492e5807fd169ac82e8c2a25b819b8a3de66cd&amp;nonce=38339"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">22:00:17</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">8936</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="green">0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=2c913175f1558582e61e0b7ea98cc5141a0763a3b577c27c9db55991e73b64da&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=ae02dd9421e9871e4b475a3313739f3182d4da2e7a801daf745e21f3d869e3d8&amp;nonce=38338"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:54:33</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">8949</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=0a0624cdc052ed6a959c141a7fedf7df3bf1e29df871e48b6d3cb9db67760015&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=fd036f72720ee5dc0c7eeddf6c3640964ed7cb15c1d37653070aec092e6d2ea6&amp;nonce=38337"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:54:31</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">5510</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=d45ad7ac919d4a67d6a7ff178b350d6cf837cdcf1e9b55fca3d30a3f88770b7e&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=8650ac3a4cddd81aaaf9dc6ff731c901adc29b993fdd303bf963b1716d9bf94e&amp;nonce=38336"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:54:29</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">4701</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="green">0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=1eaf17aca031d21c245e6b305656b34bc367d495734b1adededd53e7a3f02228&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=5f998995d3f5e3bcdbaad2163fd46a8d2c851297d79d8e26d1c8f46d661376ba&amp;nonce=38335"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:54:24</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">4410</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=6f155b944dc6fb4357aecb003f8b3041843755a516429be1c2d8fb469591e6ea&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=a7431abd9795540f8c4350b2e015164483b156d575a67fe80aa37a7b4a03bd09&amp;nonce=38334"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:54:05</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">7063</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=8eec9f8c47b8084a4b3a5ce4ba984e046ae78bd7380b319ae357d70929cac111&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=3e749730998227b43ccd65fe8577848fef70ca98b7f51f3218f0731707e17474&amp;nonce=38333"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:54:04</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2206</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="green">0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=f2e62eed43d070979a05b8656e0cbfde9b5d890e181293c21c5a1a89b7b9453e&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=45e959438655d0bc1020389ee394747f1acc08a4a969dddad670c6dd73711b95&amp;nonce=38332"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:54:02</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">1784</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="green">0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=e46154449c052b8fdb8b27555ce04fbe726382ebb90cc02d714978f709a8acb3&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=3eb6608f3151faaa4cf0a183e04278a1ea4b4e6a5c45f81c83f70ef48c5dd57f&amp;nonce=38331"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:53:58</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">4122</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="green">0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=a722285638e64fe8e69c2e5b082b020a7e7b14a8e54adc0257e286f290e99ac3&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=ee336a6a0ba479a157ba4468889247af70084a814a92c03d2eb66c9922e31bf7&amp;nonce=38330"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:53:51</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">LO</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">766</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000512</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="green">0.00000512</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=16e83f1256979a9cf4ca39f2c89849f29ceb4f3d43bcd77b1ed6486760d0214d&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=241c456a29c3cfaa7cc9aedf6310f12729dbd5ac6d1f013ee58c8b10f6caa0f3&amp;nonce=38329"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:53:43</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">1176</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000256</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000256</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=37a048302eb967dfde8de3cf0bfabda5124dc3e7fe43b15cebe7f19953d7b485&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=b8d1459290df5fb87598f4081d4a218e34300376d0a68c5a142575881160bf72&amp;nonce=38328"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:53:38</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">127</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000128</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000128</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=792324955f2aae4e1ddd07186bc7bed99403c3e01a9b73d05508f7f9bedf00ff&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=241811c101af24ed0615d7db7ee99dbbf7190fbb2cb6e43bf4b2b2891dff3616&amp;nonce=38327"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:53:34</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">3793</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000064</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000064</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=7e8ebee9774103f6eace657da77af4eec4e7ff14ab4c4d9d674c590f3bea307e&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=2b0920ff00d5beb0cc4e3c9fe2957033aa24d21e8464ec424381e6b6b38cbff2&amp;nonce=38326"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:53:32</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">347</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000032</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000032</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=499030514b10874ee563fbaedb55f33ce76db263c66b3524d049d7d9369075b8&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=300a1cd76cf5241630a56208c998d052ef4c7b35a482297e7403e9afd0605504&amp;nonce=38325"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:53:29</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">4265</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000016</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000016</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=3b619249e4cdde199a1916c4cf7cdf4c9d1b7b40c6668b67c02100320f436824&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=844bcc56d1362d8052cafe397261dd4849506c0425f2b3da957f5221c2458306&amp;nonce=38324"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_bet_history_table_row">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell">21:53:19</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">DICE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">HI</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">4582</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">0.00000001</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell">2.00</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell">
+              <font color="red">-0.00000001</font>
+            </div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell">✖</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell"><a href="https://s3.amazonaws.com/roll-verifier/verify.html?server_seed=f0443f2deb73e9f88a1752f13f82b262883a816c26402e89ae37adfa30f31fd5&amp;client_seed=NWAZxYowRlCSDrfI&amp;server_seed_hash=58c2d4f57080e8f9af2037a5c3a4af4a42480df2daf12cc570ad60c8e621a78d&amp;nonce=38323"
+                target="_blank">CLICK</a></div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box" id="multiply_history_date_row_20_07_2017">
+            <div class="center" style="margin:auto; font-weight:bold;">DATE: 20/07/2017</div>
+          </div>
+          <div class="large-12 small-12 columns center lottery_winner_table_box_container effect2 multiply_history_table_header">
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_first_last_cell font_bold">TIME</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">GAME</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">BET</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">ROLL</div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">STAKE</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold"><span data-tooltip="" class="has-tip" title="Multiplier">MULT</span></div>
+            <div class="large-2 small-2 columns center lottery_winner_table_box lottery_winner_table_second_cell font_bold">PROFIT</div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_third_cell font_bold"><span data-tooltip="" class="has-tip" title="Jackpot">JPOT</span></div>
+            <div class="large-1 small-1 columns center lottery_winner_table_box lottery_winner_table_first_last_cell font_bold"><span data-tooltip="" class="has-tip" title="Verify">VER</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
